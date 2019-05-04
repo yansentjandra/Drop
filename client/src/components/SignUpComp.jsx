@@ -1,21 +1,22 @@
 import React from "react";
-import Login from "../pages/Login";
+import SignUp from "../pages/SignUp";
 
-class LoginComp extends React.Component {
+class SignUpComp extends React.Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick(username, password) {
-    this.postData(this.getContextPath() + `/app/Users/login`, {
+  handleClick(username, password, type) {
+    console.log(type);
+    this.postData(this.getContextPath() + `/app/Users/Signup`, {
       username: username,
       password: password
     }).then(response => {
       if (response.ok) {
         response.text().then(data => {
-          if (data == "Professor" || data == "Student") {
-            this.props.history.push("/Home");
+          if (data == "Success") {
+            this.props.history.push("/");
           }
         });
       }
@@ -42,9 +43,9 @@ class LoginComp extends React.Component {
   render() {
     return (
       <div>
-        <Login onSubmit={this.handleClick} />
+        <SignUp onSubmit={this.handleClick} />
       </div>
     );
   }
 }
-export default LoginComp;
+export default SignUpComp;

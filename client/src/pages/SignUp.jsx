@@ -5,11 +5,9 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import FormControl from "@material-ui/core/FormControl";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
-import AccountCircle from "@material-ui/icons/AccountCircle";
+import PersonAdd from "@material-ui/icons/PersonAdd";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -42,8 +40,8 @@ const styles = theme => ({
     marginTop: theme.spacing.unit * 15,
     marginLeft: theme.spacing.unit * 3,
     marginRight: theme.spacing.unit * 3,
+    color: "green",
     textAlign: "center",
-    color: green[600],
     [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
       width: 400,
       marginLeft: "auto",
@@ -101,10 +99,10 @@ const styles = theme => ({
       outline: "none"
     }
   },
-  signupmessage: {
+  signinmessage: {
     marginTop: theme.spacing.unit * 3
   },
-  signuplink: {
+  signinlink: {
     color: grey[900],
     "&:hover": {
       fontWeight: "bold",
@@ -127,12 +125,13 @@ const styles = theme => ({
   }
 });
 
-class Login extends React.Component {
+class SignUp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       username: "",
-      password: ""
+      password: "",
+      type: ""
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -140,6 +139,10 @@ class Login extends React.Component {
   handleChange() {
     this.props.onSubmit(this.state.username, this.state.password);
   }
+
+  handleChange = event => {
+    this.setState({ type: event.target.value });
+  };
 
   render() {
     const { classes } = this.props;
@@ -151,7 +154,7 @@ class Login extends React.Component {
           <CssBaseline />
           <Paper className={classes.paper}>
             <Avatar className={classes.avatar}>
-              <AccountCircle style={{ fontSize: 50 }} />
+              <PersonAdd style={{ fontSize: 50 }} />
             </Avatar>
             <form className={classes.form}>
               <FormControl margin="normal" required fullWidth>
@@ -166,14 +169,11 @@ class Login extends React.Component {
                 </InputLabel>
                 <Input
                   id="email"
-                  type="text"
+                  type="email"
                   name="email"
                   classes={{
                     underline: classes.cssUnderline
                   }}
-                  onChange={event =>
-                    this.setState({ username: event.target.value })
-                  }
                 />
               </FormControl>
               <FormControl margin="normal" required fullWidth>
@@ -193,36 +193,20 @@ class Login extends React.Component {
                   classes={{
                     underline: classes.cssUnderline
                   }}
-                  onChange={event =>
-                    this.setState({ password: event.target.value })
-                  }
                 />
               </FormControl>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    value="remember"
-                    classes={{
-                      root: classes.root,
-                      checked: classes.checked
-                    }}
-                  />
-                }
-                label="Remember me"
-              />
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
                 className={classes.submit}
-                onClick={this.handleChange}
               >
-                Sign in
+                Register
               </Button>
-              <Typography className={classes.signupmessage} align="center">
-                Don't have an account?&nbsp;
-                <NavLink exact to="/SignUp" className={classes.signuplink}>
-                  Sign Up
+              <Typography className={classes.signinmessage} align="center">
+                Already have and account?&nbsp;
+                <NavLink exact to="/" className={classes.signinlink}>
+                  Sign In
                 </NavLink>
               </Typography>
             </form>
@@ -233,8 +217,8 @@ class Login extends React.Component {
   }
 }
 
-Login.propTypes = {
+SignUp.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(Login);
+export default withStyles(styles)(SignUp);
