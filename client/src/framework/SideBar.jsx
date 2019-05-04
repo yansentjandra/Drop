@@ -110,7 +110,9 @@ class MiniDrawer extends React.Component {
             {list.map((item, index) => (
               <ListItem
                 button
-                style={{ paddingLeft: "25px" }}
+                style={{
+                  paddingLeft: "25px"
+                }}
                 key={index}
                 component={Link}
                 to={item.link}
