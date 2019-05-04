@@ -8,7 +8,7 @@ class LoginComp extends React.Component {
   }
 
   handleClick(username, password) {
-    this.postData(this.getContextPath() + `/app/Users/login`, {
+    this.postData(`localhost:5000/app/Users/login`, {
       username: username,
       password: password
     }).then(response => {

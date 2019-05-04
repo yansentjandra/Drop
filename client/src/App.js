@@ -9,7 +9,7 @@ class App extends React.Component {
     return (
       <HashRouter>
         <div>
-          <Route exact path="/" component={Toolbar} />
+          <Route exact path="/" component={Login} />
           <Route exact path="/SignUp" component={SignUp} />
           <Route exact path="/Logout" component={Login} />
         </div>

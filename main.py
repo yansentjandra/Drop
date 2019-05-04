@@ -11,50 +11,18 @@ app = Flask(__name__)
 def index():
     return "Hello, World!"
 
-@app.route('/enterData')
-def enterData():
-    # setUser = db.collection('users').add({
-    #     'userName': "user1",
-    #     'password': "pass1"
-    # })
-    # setUser = db.collection('users').add({
-    #     'userName': "user2",
-    #     'password': "pass2"
-    # })
-    # setUser = db.collection('users').add({
-    #     'userName': "user3",
-    #     'password': "pass3"
-    # })
-
-    # setUser = db.collection('homeless').add({
-    #     'userName': "Joe",
-    #     'password': "Homeless",
-    #     'picture': "test.png",
-    #     'location': "30th St Station",
-    #     'donation': 30
-    # })
-
-    # setUser = db.collection('homeless').add({
-    #     'firstName': "Dan",
-    #     'lastName': "Homeless",
-    #     'picture': "test2.png",
-    #     'location': "30th St Station",
-    #     'donation': 50
-    # })
-    #
-    # setUser = db.collection('homeless').add({
-    #     'firstName': "Tom",
-    #     'lastName': "Homeless",
-    #     'picture': "test3.png",
-    #     'location': "30th St Station",
-    #     'donation': 70
-    # })
-
-
-
+@app.route('/app/users/login', methods=['POST'])
+def login():
+    print(login)
     return ""
 
-@app.route('/all')
+@app.route('/app/users/getlogin', methods=['GET'])
+def getlogin():
+    print(username)
+    return ""
+
+
+@app.route('/users', methods=['GET'])
 def all():
     x = []
     users_ref = db.collection(u'users')
@@ -64,7 +32,7 @@ def all():
         print(doc.to_dict())
         x.append(doc.to_dict())
 
-    return jsonify(x)
+    return jsonify({'users': x})
 
 
 if __name__ == '__main__':
