@@ -131,14 +131,28 @@ class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
+      email: "",
       password: ""
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleChange() {
-    this.props.onSubmit(this.state.username, this.state.password);
+    this.props.onSubmit(this.state.email, this.state.password);
+  }
+
+  handleClick(event) {
+    event.preventDefault();
+    console.log(this.state)
+    fetch('http://localhost:5000/signin', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(this.state)
+    })
   }
 
   render() {
@@ -172,7 +186,7 @@ class Login extends React.Component {
                     underline: classes.cssUnderline
                   }}
                   onChange={event =>
-                    this.setState({ username: event.target.value })
+                    this.setState({ email: event.target.value })
                   }
                 />
               </FormControl>
@@ -215,7 +229,7 @@ class Login extends React.Component {
                 fullWidth
                 variant="contained"
                 className={classes.submit}
-                onClick={this.handleChange}
+                onClick={this.handleClick}
               >
                 Sign in
               </Button>
